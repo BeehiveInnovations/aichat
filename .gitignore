@@ -2,3 +2,6 @@
 /tmp
 /.env
 *.log
+/.idea/aichat.iml
+/.idea/modules.xml
+/.idea/vcs.xml

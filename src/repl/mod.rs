@@ -232,11 +232,11 @@ Type ".help" for additional help.
                 }
                 Ok(Signal::CtrlC) => {
                     self.abort_signal.set_ctrlc();
-                    println!("(To exit, press Ctrl+D or enter \".exit\")\n");
+                    break;
                 }
                 Ok(Signal::CtrlD) => {
                     self.abort_signal.set_ctrld();
-                    break;
+                    println!("(To exit, press Ctrl+C or enter \".exit\")\n");
                 }
                 _ => {}
             }
@@ -284,6 +284,13 @@ Type ".help" for additional help.
             KeyCode::BackTab,
             ReedlineEvent::MenuPrevious,
         );
+        // ALT+ENTER -> Insert a newline instead of submitting the line
+        keybindings.add_binding(
+            KeyModifiers::ALT,
+            KeyCode::Enter,
+            ReedlineEvent::Edit(vec![EditCommand::InsertNewline]),
+        );
+
         keybindings.add_binding(
             KeyModifiers::CONTROL,
             KeyCode::Enter,
